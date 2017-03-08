@@ -1,0 +1,6 @@
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^cv\.paulpavlish\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.cv\.paulpavlish\.com$
+RewriteRule ^/?$ "http\:\/\/paulpavlish\.com\/cv\/" [R=301,L]
+

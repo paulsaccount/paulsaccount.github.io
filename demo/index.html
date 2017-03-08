@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flash Card</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+  <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.3.js'></script>
+  <script type='text/javascript' src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+  <script src="jquery.touchSwipe.js"></script>
+
+<script type='text/javascript'>//<![CDATA[ 
+
+$(function() {      
+      //Enable swiping...
+      $("#index").swipe( {
+        swipeStatus:function(event, phase, direction, distance)
+        {
+          var str = "";
+          switch (phase) {
+            case "start" : str="Started"; break;
+            case "move" : str="You have moved " + distance +" pixels, past 200 and the handler will fire"; break;
+            case "end" : 
+              str="Handler fired, you swiped " + direction; 
+              if(direction === "up") {
+                $.mobile.changePage("#answer1", {
+                  transition: "slideup",
+                  reverse: false
+                });
+                return false;
+              } else if(direction === "left") {
+                $.mobile.changePage("#page2", {
+                  transition: "slide",
+                  reverse: false
+                });
+              }
+              break;
+            case "cancel" : str="cancel handler fired"; break;
+          }
+          console.log(str);
+        },
+        triggerOnTouchEnd:false,
+        threshold:200
+      });
+
+      $("#page2").swipe( {
+        swipeStatus:function(event, phase, direction, distance)
+        {
+          var str = "";
+          switch (phase) {
+            case "start" : str="Started"; break;
+            case "move" : str="You have moved " + distance +" pixels, past 200 and the handler will fire"; break;
+            case "end" : 
+              str="Handler fired, you swiped " + direction; 
+              if(direction === "up") {
+                $.mobile.changePage("#answer2", {
+                  transition: "slideup",
+                  reverse: false
+                });
+                return false;
+              } else if(direction === "right") {
+                history.back();
+              }
+              break;
+            case "cancel" : str="cancel handler fired"; break;
+          }
+          console.log(str);
+        },
+        triggerOnTouchEnd:false,
+        threshold:200
+      });
+    
+
+      $(".answer").swipe( {
+        swipeStatus:function(event, phase, direction, distance)
+        {
+          switch (phase) {
+            case "start" : str="Started"; break;
+            case "move" : str="You have moved " + distance +" pixels, past 200 and the handler will fire"; break;
+            case "end" : 
+              str="Handler fired, you swiped " + direction; 
+              if(direction === "down") {
+                history.back();
+                return false;
+              }
+              break;
+            case "cancel" : str="cancel handler fired"; break;
+          }
+        },
+        triggerOnTouchEnd:false,
+        threshold:200
+      });  
+});
+</script>
+
+</head>
+
+<body>
+    <div data-role="page" id="index">
+        <div data-theme="a" data-role="header">
+            <h3>
+                Question 1/10
+            </h3>
+            <a href="#page2" class="ui-btn-right" data-transition="slide">Next</a>
+        </div>
+
+      <div data-role="content">
+          <h4>
+              Geography
+          </h4>
+          <hr style="height:3px; background-color:#ccc; border:0; margin-top:12px; margin-bottom:12px;">
+          <div data-controltype="textblock">
+              <p>
+                  <b>
+                      <span id="_mce_caret" data-mce-bogus="1" style="">
+                          <span style="font-size: xx-large;" data-mce-bogus="1">
+                              ﻿
+                          </span>
+                      </span>
+                      What is the capital of the United States?
+                  </b>
+              </p>
+              <p>
+                  <b>
+                      <br>
+                  </b>
+              </p>
+          </div>
+          <div data-controltype="textblock">
+              <p>
+                  <b>
+                      <br>
+                  </b>
+              </p>
+              <p>
+                  <b>
+                      <br>
+                  </b>
+              </p>
+
+              <p style="text-align: center;">
+                  <br>
+              </p>
+          </div>
+          <div data-controltype="textblock">
+              <p style="text-align: center;">
+                  <span style="font-size: small;" data-mce-style="font-size: small;">
+                      <b>
+                          ﻿Slide up to see back of the card
+                      </b>
+                  </span>
+              </p>
+          </div>
+      </div>
+
+        <div data-theme="a" data-role="footer" data-position="fixed">
+
+        </div>
+    </div>
+    <div data-role="page" id="answer1" class="answer">
+      <div data-theme="a" data-role="header">
+          <h3>
+              Answer
+          </h3>
+          <a data-rel="back" class="ui-btn-left">Back</a>
+      </div>
+      <div data-role="content">
+          <div data-controltype="textblock">
+              <p>
+                  <b>
+                      <span id="_mce_caret" data-mce-bogus="1" style="">
+                          <span style="font-size: xx-large;" data-mce-bogus="1">
+                              ﻿
+                          </span>
+                      </span>
+                      Washington D.C.
+                  </b>
+              </p>
+              <p>
+                  <b>
+                      <br>
+                  </b>
+              </p>
+          </div>
+          <div data-controltype="textblock">
+              <p>
+                  <b>
+                      <br>
+                  </b>
+              </p>
+              <p>
+                  <b>
+                      <br>
+                  </b>
+              </p>
+
+              <p style="text-align: center;">
+                  <br>
+              </p>
+          </div>
+          <div data-controltype="textblock">
+              <p style="text-align: center;">
+                  <span style="font-size: small;" data-mce-style="font-size: small;">
+                      <b>
+                          ﻿Slide down to return
+                      </b>
+                  </span>
+              </p>
+          </div>
+      </div>
+
+        <div data-theme="a" data-role="footer" data-position="fixed">
+
+        </div>
+    </div>
+
+    <div data-role="page" id="page2">
+        <div data-theme="a" data-role="header">
+            <h3>
+                Question 2/10
+            </h3>
+            <a href="#index" class="ui-btn-right">Next</a>
+            <a data-rel="back" class="ui-btn-left">Back</a>
+        </div>
+
+      <div data-role="content">
+          <h4>
+              Geography
+          </h4>
+          <hr style="height:3px; background-color:#ccc; border:0; margin-top:12px; margin-bottom:12px;">
+          <div data-controltype="textblock">
+              <p>
+                  <b>
+                      <span id="_mce_caret" data-mce-bogus="1" style="">
+                          <span style="font-size: xx-large;" data-mce-bogus="1">
+                              ﻿
+                          </span>
+                      </span>
+                      Where is the liberty bell located?
+                  </b>
+              </p>
+              <p>
+                  <b>
+                      <br>
+                  </b>
+              </p>
+          </div>
+          <div data-controltype="textblock">
+              <p>
+                  <b>
+                      <br>
+                  </b>
+              </p>
+              <p>
+                  <b>
+                      <br>
+                  </b>
+              </p>
+
+              <p style="text-align: center;">
+                  <br>
+              </p>
+          </div>
+          <div data-controltype="textblock">
+              <p style="text-align: center;">
+                  <span style="font-size: small;" data-mce-style="font-size: small;">
+                      <b>
+                          ﻿Slide up to see back of the card
+                      </b>
+                  </span>
+              </p>
+          </div>
+      </div>
+
+        <div data-theme="a" data-role="footer" data-position="fixed">
+
+        </div>
+    </div>
+
+    <div data-role="page" id="answer2" class="answer">
+      <div data-theme="a" data-role="header">
+          <h3>
+              Answer
+          </h3>
+          <a data-rel="back" class="ui-btn-left">Back</a>
+      </div>
+      <div data-role="content">
+          <div data-controltype="textblock">
+              <p>
+                  <b>
+                      <span id="_mce_caret" data-mce-bogus="1" style="">
+                          <span style="font-size: xx-large;" data-mce-bogus="1">
+                              ﻿
+                          </span>
+                      </span>
+                      Washington D.C.
+                  </b>
+              </p>
+              <p>
+                  <b>
+                      <br>
+                  </b>
+              </p>
+          </div>
+          <div data-controltype="textblock">
+              <p>
+                  <b>
+                      <br>
+                  </b>
+              </p>
+              <p>
+                  <b>
+                      <br>
+                  </b>
+              </p>
+
+              <p style="text-align: center;">
+                  <br>
+              </p>
+          </div>
+          <div data-controltype="textblock">
+              <p style="text-align: center;">
+                  <span style="font-size: small;" data-mce-style="font-size: small;">
+                      <b>
+                          ﻿Slide down to return
+                      </b>
+                  </span>
+              </p>
+          </div>
+      </div>
+      <div data-theme="a" data-role="footer" data-position="fixed"></div>
+    </div>
+</body>
+</html>   
+  
+
